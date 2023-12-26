@@ -7,8 +7,12 @@ fetchHttpAnalitic(uri) {
   return client.get(uri);
 }
 
-// parseDescription(description){
-//   description = parse(description);
-//   var txtDescription = parse(description.body.text).documentElement.text;
-//   return txtDescription;
-// }
+parseDescription(description) {
+  description = parse(description);
+  var parseDescription = parse(description.body.text).documentElement;
+  if (parseDescription != null) {
+    var txtDescription = parseDescription.text;
+    return txtDescription;
+  }
+  return Null;
+}

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:webfeed/webfeed.dart';
 import 'dart:io' as io;
 import 'package:analitic/common/fetch_http_analitic.dart';
+import 'dart:convert';
+import 'package:intl/intl.dart';
+
 
 class HomeScreenRSS extends StatefulWidget {
   const HomeScreenRSS({super.key});
@@ -36,7 +39,10 @@ class HomeScreenRSSState extends State {
                   return Container(
                       child: ListView.builder(
                     padding: EdgeInsets.only(
-                        left: 10.0, top: 10.0, right: 10.0, bottom: 20.0),
+                        left: 10.0,
+                        top: 10.0,
+                        right: 10.0,
+                        bottom: 20.0),
                     scrollDirection: Axis.vertical,
                     itemCount: _habsList.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -55,6 +61,28 @@ class HomeScreenRSSState extends State {
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold),
                               ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                '${parseDescription(
+                                    _habsList[index].description)}',
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Text(DateFormat('dd.mm.yyyy kk:mm').format(
+                                      DateTime.parse(
+                                          '${_habsList[index].pubDate}'))),
+                                  FloatingActionButton.extended(
+                                    onPressed: null,
+                                    label: Text('Читать'),
+                                    icon: Icon(Icons.arrow_forward),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         ),
